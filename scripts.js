@@ -1,4 +1,35 @@
+// Import data about books, authors, genres, and the number of books to show per page
 import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
+
+// Classes to represent each book, author, and genre
+// This class creates a "Book" object with information like ID, title, author, genres, image, etc.
+class Book {
+    constructor(id, title, author, genres, image, published, description) {
+        this.id = id; // Unique ID for the book
+        this.title = title; // Title of the book
+        this.author = author; //ID of the author
+        this.genres = genres; // Array of genre IDs associated with the book
+        this.image = image; // Image URL for the book cover
+        this.published = published; // Publication date of the book
+        this.description = description; // Brief description of the book
+        }
+    }
+
+// This class creates an "Author" object with ID and name
+class Author {
+    constructor(id, name) {
+        this.id = id; // Unique ID for the author
+        this.name = name; // Name of the author
+    }
+}
+
+// This class creates a "Genre" object with ID and name
+class Genre {
+    constructor(id, name) {
+        this.id = id; // Unique ID for the genre
+        this.name = name; // Name of the genre
+    }
+}
 
 let page = 1;
 let matches = books
