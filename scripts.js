@@ -52,33 +52,34 @@ const listMessage = document.querySelector('[data-list-message]'); // Message sh
 const settingsForm = document.querySelector('[data-settings-form]');  // Form for theme settings
 const searchForm = document.querySelector('[data-search-form]');  // Form for search functionality
 
+// Set up for displaying books
+let page = 1; // Keep track of the current page number
+let matches = books // Store books to display, starting with all books
 
-let page = 1;
-let matches = books
-
-const starting = document.createDocumentFragment()
-
+// Functions for Repetitive Tasks
+// Render a list of books onto the page, limited by BOOKS_PER_PAGE constant
+const renderBooks = (bookList) => {
+const fragment = document.createDocumentFragment()
+// Loop through the book list and create preview buttons for each book
 for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-    const element = document.createElement('button')
-    element.classList = 'preview'
-    element.setAttribute('data-preview', id)
-
+    const element = document.createElement('button');  // Create a button for each book
+    element.classList = 'preview';
+    element.setAttribute('data-preview', id);
     element.innerHTML = `
         <img
             class="preview__image"
             src="${image}"
         />
-        
         <div class="preview__info">
             <h3 class="preview__title">${title}</h3>
             <div class="preview__author">${authors[author]}</div>
         </div>
     `
 
-    starting.appendChild(element)
+    fragment.appendChild(element); // Append the button to the fragment
 }
-
-document.querySelector('[data-list-items]').appendChild(starting)
+document.querySelector('[data-list-items]').appendChild(fragment) // Append the fragment to the DOM
+};
 
 const genreHtml = document.createDocumentFragment()
 const firstGenreElement = document.createElement('option')
