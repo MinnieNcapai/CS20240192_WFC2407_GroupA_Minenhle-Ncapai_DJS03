@@ -31,6 +31,28 @@ class Genre {
     }
 }
 
+//Intialize Data
+//Convert each item in "books" into a Book object and store them in "bookInstances"
+const bookInstances = books.map(book => new Book(book.id, book.title, book.author, book.genres, book.image, book.published, book.description));
+// Convert each author entry into an Author object and store it in "authorInstances"
+const authorInstances = Object.entries(authors).map(([id, name]) => new Author(id, name));
+// Convert each genre entry into a Genre object and store them in "genreInstances"
+const genreInstances = Object.entries(genres).map(([id, name]) => new Genre(id,name));
+
+//DOM Elements
+// Select and store DOM elements for book list, genre filter, author filter, and UI overlays
+const listItems = document.querySelector('[data-list-items]'); // Container for displaying book previews
+const searchGenres = document.querySelector('[data-search-genres]'); // Dropdown for genre filtering
+const searchAuthors = document.querySelector('[data-search-authors]'); // Dropdown for author filtering
+const listButton = document.querySelector('[data-list-button]'); // Button to show more books
+const searchOverlay = document.querySelector('[data-search-overlay]');  // Overlay for search options
+const settingsOverlay = document.querySelector('[data-settings-overlay]'); // Overlay for theme settings
+const listActive = document.querySelector('[data-list-active]');  // Modal for displaying active book details
+const listMessage = document.querySelector('[data-list-message]'); // Message shown when no books match filters
+const settingsForm = document.querySelector('[data-settings-form]');  // Form for theme settings
+const searchForm = document.querySelector('[data-search-form]');  // Form for search functionality
+
+
 let page = 1;
 let matches = books
 
