@@ -81,18 +81,25 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 document.querySelector('[data-list-items]').appendChild(fragment) // Append the fragment to the DOM
 };
 
-const genreHtml = document.createDocumentFragment()
-const firstGenreElement = document.createElement('option')
-firstGenreElement.value = 'any'
-firstGenreElement.innerText = 'All Genres'
-genreHtml.appendChild(firstGenreElement)
+// Populate a select element with options, such as genres or authors, and a default option
+const renderOptions = (selectElement, options, defaultOptionText) => {
+    const fragment = document.createDocumentFragment();
+    const defaultOption = document.createElement('option');
+    defaultOption.value = 'any';
+    defaultOption.innerText = defaultOptionText; // Set the text of the default option
+    fragment.appendChild(defaultOption); // Append the default option to the fragment
 
-for (const [id, name] of Object.entries(genres)) {
-    const element = document.createElement('option')
-    element.value = id
-    element.innerText = name
-    genreHtml.appendChild(element)
+ // Loop through options and create an option element for each
+
+for (const option of options) {
+    const element = document.createElement('option');
+    element.value = option.id; // Set the value to the option ID
+    element.innerText = option.name; // Set the displayed text to the option name
+    fragment.appendChild(element);
 }
+selectElement.appendChild(fragment);
+};
+
 
 document.querySelector('[data-search-genres]').appendChild(genreHtml)
 
