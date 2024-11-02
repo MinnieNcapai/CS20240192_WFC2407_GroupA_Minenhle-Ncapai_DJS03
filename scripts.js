@@ -3,7 +3,21 @@ import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
 
 // Classes to represent each book, author, and genre
 // This class creates a "Book" object with information like ID, title, author, genres, image, etc.
+/**
+ * Represents a Book with its details.
+ * @class
+ */
 class Book {
+     /**
+     * Create a Book instance.
+     * @param {number} id - Unique identifier for the book.
+     * @param {string} title - Title of the book.
+     * @param {number} author - ID of the author.
+     * @param {Array<number>} genres - Array of genre IDs associated with the book.
+     * @param {string} image - Image URL for the book cover.
+     * @param {string} published - Publication date of the book.
+     * @param {string} description - Brief description of the book.
+     */
     constructor(id, title, author, genres, image, published, description) {
         this.id = id; // Unique ID for the book
         this.title = title; // Title of the book
@@ -16,7 +30,16 @@ class Book {
     }
 
 // This class creates an "Author" object with ID and name
+/**
+ * Represents an Author with an ID and name.
+ * @class
+ */
 class Author {
+    /**
+     * Create an Author instance.
+     * @param {number} id - Unique identifier for the author.
+     * @param {string} name - Name of the author.
+     */
     constructor(id, name) {
         this.id = id; // Unique ID for the author
         this.name = name; // Name of the author
@@ -24,7 +47,16 @@ class Author {
 }
 
 // This class creates a "Genre" object with ID and name
+/**
+ * Represents an Genre with an ID and name.
+ * @class
+ */
 class Genre {
+     /**
+     * Create an Genre instance.
+     * @param {number} id - Unique identifier for the genre.
+     * @param {string} name - Name of the genre.
+     */
     constructor(id, name) {
         this.id = id; // Unique ID for the genre
         this.name = name; // Name of the genre
@@ -58,6 +90,9 @@ let matches = books // Store books to display, starting with all books
 
 // Functions for Repetitive Tasks
 // Render a list of books onto the page, limited by BOOKS_PER_PAGE constant
+/**
+ * @param {Array<Book>} bookList - Array of Book objects to be rendered.
+ */
 const renderBooks = (bookList) => {
 const fragment = document.createDocumentFragment()
 // Loop through the book list and create preview buttons for each book
@@ -82,6 +117,11 @@ document.querySelector('[data-list-items]').appendChild(fragment) // Append the 
 };
 
 // Populate a select element with options, such as genres or authors, and a default option
+/**
+ * @param {HTMLElement} selectElement - The select element to populate.
+ * @param {Array<Genre|Author>} options - Array of options to be added to the select element.
+ * @param {string} defaultOptionText - Text for the default option.
+ */
 const renderOptions = (selectElement, options, defaultOptionText) => {
     const fragment = document.createDocumentFragment();
     const defaultOption = document.createElement('option');
@@ -108,6 +148,9 @@ renderOptions(document.querySelector('[data-search-authors]'), authorInstances, 
 
 //Theme Settings
 // Apply selected theme by setting custom CSS properties for colors
+/**
+ * @param {string} theme - The selected theme ('day' or 'night').
+ */
 const applyTheme = (theme) => {
 // Set colors based on the selected theme (night or day)
   if (theme === 'night') {
@@ -121,6 +164,9 @@ const applyTheme = (theme) => {
 
 // Event Handlers
 // Handle book search based on title, author, and genre filters
+/**
+ * @param {Event} event - The event triggered by form submission.
+ */
 const handleSearch = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -142,6 +188,10 @@ const handleSearch = (event) => {
 };
 
 // Handle theme change when user selects light or dark mode
+/**
+ * @param {Event} event - The event triggered by form submission.
+ */
+
 const handleThemeChange = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -180,6 +230,10 @@ listButton.disabled = matches.length <= page * BOOKS_PER_PAGE;
 };
 
 // Show book details when user selects a book from the list
+/**
+ * Displays detailed information about a selected book in a modal.
+ * @param {string} bookId - The unique identifier of the book to display.
+ */
 const displayBookDetails = (bookId) => {
     const book = matches.find((book) => book.id === bookId);
     if (book) {
